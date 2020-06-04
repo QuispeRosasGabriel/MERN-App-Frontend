@@ -1,7 +1,13 @@
 import React, { useReducer } from "react";
 import proyectoContext from "./ProyectoContext";
 import ProyectoReducer from "./ProyectoReducer";
-import { FORMULARIO_PROYECTO, LISTAR_PROYECTOS } from "../../types";
+import {
+  FORMULARIO_PROYECTO,
+  LISTAR_PROYECTOS,
+  AGREGAR_PROYECTO,
+  VALIDAR_FORMULARIO,
+} from "../../types";
+import { v4 as uuid } from "uuid";
 
 const ProyectoState = (props) => {
   const proyectos = [
@@ -13,6 +19,7 @@ const ProyectoState = (props) => {
   const initialState = {
     proyectos: [],
     formulario: false,
+    errorFormulario: false,
   };
 
   //dispatch para ejecutar las acciones
@@ -25,10 +32,23 @@ const ProyectoState = (props) => {
     });
   };
 
-  const handleGetProjects = (proyecos) => {
+  const handleGetProjects = () => {
     dispatch({
       type: LISTAR_PROYECTOS,
       payload: proyectos,
+    });
+  };
+
+  const handleAddNewProject = (proyecto) => {
+    proyecto.id = uuid;
+    //insertar proyecto en el state
+    dispatch({ type: AGREGAR_PROYECTO, payload: proyecto });
+  };
+
+  //VALIDA EL FORMULARIO POR SI HAY ERRORES
+  const handleShowError = () => {
+    dispatch({
+      type: VALIDAR_FORMULARIO,
     });
   };
 
@@ -37,8 +57,11 @@ const ProyectoState = (props) => {
       value={{
         proyectos: state.proyectos,
         formulario: state.formulario,
+        errorFormulario: state.errorFormulario,
+        handleShowError,
         handleShowForm,
         handleGetProjects,
+        handleAddNewProject,
       }}
     >
       {props.children}
