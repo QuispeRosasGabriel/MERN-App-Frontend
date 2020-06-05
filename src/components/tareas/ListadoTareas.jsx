@@ -13,13 +13,7 @@ const ListadoTareas = () => {
   }
 
   const [proyectoActual] = proyecto;
-  const tareasProyecto = [
-    { nombre: "Elegir Plataforma", estado: true },
-    { nombre: "Elegir Colores", estado: false },
-    { nombre: "Elegir Pasarelas de pago", estado: false },
-    { nombre: "Elegir hosting", estado: true },
-  ];
-
+  const tareasProyecto = [];
   const deleteProject = () => {
     swal({
       title: `Estas seguro de borrar el proyecto ${proyectoActual.nombre} ?`,
