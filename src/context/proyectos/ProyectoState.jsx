@@ -6,6 +6,7 @@ import {
   LISTAR_PROYECTOS,
   AGREGAR_PROYECTO,
   VALIDAR_FORMULARIO,
+  PROYECTO_ACTUAL,
 } from "../../types";
 import { v4 as uuid } from "uuid";
 
@@ -20,6 +21,7 @@ const ProyectoState = (props) => {
     proyectos: [],
     formulario: false,
     errorFormulario: false,
+    proyecto: null,
   };
 
   //dispatch para ejecutar las acciones
@@ -52,16 +54,26 @@ const ProyectoState = (props) => {
     });
   };
 
+  //seleccionar un proyecto
+  const handleCurrentProject = (proyectoId) => {
+    dispatch({
+      type: PROYECTO_ACTUAL,
+      payload: proyectoId,
+    });
+  };
+
   return (
     <proyectoContext.Provider
       value={{
         proyectos: state.proyectos,
         formulario: state.formulario,
         errorFormulario: state.errorFormulario,
+        proyecto: state.proyecto,
         handleShowError,
         handleShowForm,
         handleGetProjects,
         handleAddNewProject,
+        handleCurrentProject,
       }}
     >
       {props.children}
