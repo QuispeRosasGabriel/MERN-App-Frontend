@@ -7,6 +7,7 @@ import {
   AGREGAR_PROYECTO,
   VALIDAR_FORMULARIO,
   PROYECTO_ACTUAL,
+  ELIMINAR_PROYECTO,
 } from "../../types";
 import { v4 as uuid } from "uuid";
 
@@ -62,6 +63,14 @@ const ProyectoState = (props) => {
     });
   };
 
+  //elimina proyecto
+  const handleDeleteProject = (proyectoId) => {
+    dispatch({
+      type: ELIMINAR_PROYECTO,
+      payload: proyectoId,
+    });
+  };
+
   return (
     <proyectoContext.Provider
       value={{
@@ -74,6 +83,7 @@ const ProyectoState = (props) => {
         handleGetProjects,
         handleAddNewProject,
         handleCurrentProject,
+        handleDeleteProject,
       }}
     >
       {props.children}

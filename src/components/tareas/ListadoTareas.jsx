@@ -1,10 +1,11 @@
 import React, { Fragment, useContext } from "react";
 import Tarea from "./Tarea";
 import proyectoContext from "../../context/proyectos/ProyectoContext";
+import swal from "sweetalert";
 
 const ListadoTareas = () => {
   const proyectosContext = useContext(proyectoContext);
-  const { proyecto } = proyectosContext;
+  const { proyecto, handleDeleteProject } = proyectosContext;
 
   //si no hay proyecto seleccionado
   if (!proyecto) {
@@ -19,6 +20,25 @@ const ListadoTareas = () => {
     { nombre: "Elegir hosting", estado: true },
   ];
 
+  const deleteProject = () => {
+    swal({
+      title: `Estas seguro de borrar el proyecto ${proyectoActual.nombre} ?`,
+      text: "Si lo borras no podras recuperarlo",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    }).then((willDelete) => {
+      if (willDelete) {
+        swal("El proyecto ha sido eliminado!", {
+          icon: "success",
+        });
+        handleDeleteProject(proyectoActual.id);
+      } else {
+        swal("No se ha eliminado tu proyecto!");
+      }
+    });
+  };
+
   return (
     <Fragment>
       <h2>Proyecto: {proyectoActual.nombre}</h2>
@@ -30,7 +50,11 @@ const ListadoTareas = () => {
         ) : (
           tareasProyecto.map((tarea, i) => <Tarea tarea={tarea} key={i} />)
         )}
-        <button type="button" className="btn btn-eliminar">
+        <button
+          type="button"
+          className="btn btn-eliminar"
+          onClick={deleteProject}
+        >
           Eliminar proyecto &times;
         </button>
       </ul>
