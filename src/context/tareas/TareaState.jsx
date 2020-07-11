@@ -14,8 +14,9 @@ const TareaState = (props) => {
       { nombre: "Elegir hosting", estado: true, proyectoId: 4 },
       { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 3 },
       { nombre: "Elegir Colores", estado: false, proyectoId: 2 },
-      { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 3 },
+      { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 4 },
     ],
+    tareasProyecto: null,
   };
 
   //crear dispatch y state
@@ -35,6 +36,7 @@ const TareaState = (props) => {
       value={{
         tareas: state.tareas,
         getTodos,
+        tareasProyecto: state.tareasProyecto,
       }}
     >
       {props.children}
