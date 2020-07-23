@@ -2,10 +2,15 @@ import React, { Fragment, useContext } from "react";
 import Tarea from "./Tarea";
 import proyectoContext from "../../context/proyectos/ProyectoContext";
 import swal from "sweetalert";
+import TareaContext from "../../context/tareas/TareaContext";
 
 const ListadoTareas = () => {
   const proyectosContext = useContext(proyectoContext);
   const { proyecto, handleDeleteProject } = proyectosContext;
+
+  //Obtener las tareas del context
+  const tareasContext = useContext(TareaContext);
+  const { tareasProyecto } = tareasContext;
 
   //si no hay proyecto seleccionado
   if (!proyecto) {
@@ -13,7 +18,7 @@ const ListadoTareas = () => {
   }
 
   const [proyectoActual] = proyecto;
-  const tareasProyecto = [];
+
   const deleteProject = () => {
     swal({
       title: `Estas seguro de borrar el proyecto ${proyectoActual.nombre} ?`,
