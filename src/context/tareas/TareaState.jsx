@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import TareaContext from "./TareaContext";
 import TareaReducer from "./TareaReducer";
-import { TAREAS_PROYECTO, AGREGAR_TAREA } from "../../types";
+import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA } from "../../types";
 
 const TareaState = (props) => {
   const initialState = {
@@ -17,6 +17,7 @@ const TareaState = (props) => {
       { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 4 },
     ],
     tareasProyecto: null,
+    errorTarea: false,
   };
 
   //crear dispatch y state
@@ -39,13 +40,22 @@ const TareaState = (props) => {
     });
   };
 
+  //valida y muestra un error
+  const validateTodo = () => {
+    dispatch({
+      type: VALIDAR_TAREA,
+    });
+  };
+
   return (
     <TareaContext.Provider
       value={{
         tareas: state.tareas,
         tareasProyecto: state.tareasProyecto,
+        errorTarea: state.errorTarea,
         getTodos,
         addTodo,
+        validateTodo,
       }}
     >
       {props.children}
