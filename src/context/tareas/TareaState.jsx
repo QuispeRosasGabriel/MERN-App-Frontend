@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import TareaContext from "./TareaContext";
 import TareaReducer from "./TareaReducer";
-import { TAREAS_PROYECTO } from "../../types";
+import { TAREAS_PROYECTO, AGREGAR_TAREA } from "../../types";
 
 const TareaState = (props) => {
   const initialState = {
@@ -31,12 +31,21 @@ const TareaState = (props) => {
     });
   };
 
+  //agregar tarea al proyecto seleccionado
+  const addTodo = (tarea) => {
+    dispatch({
+      type: AGREGAR_TAREA,
+      payload: tarea,
+    });
+  };
+
   return (
     <TareaContext.Provider
       value={{
         tareas: state.tareas,
-        getTodos,
         tareasProyecto: state.tareasProyecto,
+        getTodos,
+        addTodo,
       }}
     >
       {props.children}
