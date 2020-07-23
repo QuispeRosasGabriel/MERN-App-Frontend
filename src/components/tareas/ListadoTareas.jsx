@@ -1,8 +1,9 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 import Tarea from "./Tarea";
 import proyectoContext from "../../context/proyectos/ProyectoContext";
 import swal from "sweetalert";
 import TareaContext from "../../context/tareas/TareaContext";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 const ListadoTareas = () => {
   const proyectosContext = useContext(proyectoContext);
@@ -39,7 +40,7 @@ const ListadoTareas = () => {
   };
 
   return (
-    <Fragment>
+    <>
       <h2>Proyecto: {proyectoActual.nombre}</h2>
       <ul className="listado-tareas">
         {tareasProyecto.length === 0 ? (
@@ -47,9 +48,13 @@ const ListadoTareas = () => {
             <p>No hay tareas</p>
           </li>
         ) : (
-          tareasProyecto.map((tarea, i) => (
-            <Tarea key={tarea.id} tarea={tarea} />
-          ))
+          <TransitionGroup>
+            {tareasProyecto.map((tarea, i) => (
+              <CSSTransition key={tarea.id} timeout={200} classNames="tarea">
+                <Tarea tarea={tarea} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
         )}
         <button
           type="button"
@@ -59,7 +64,7 @@ const ListadoTareas = () => {
           Eliminar proyecto &times;
         </button>
       </ul>
-    </Fragment>
+    </>
   );
 };
 
