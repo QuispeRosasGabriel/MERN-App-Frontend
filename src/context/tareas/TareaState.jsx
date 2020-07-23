@@ -1,20 +1,45 @@
 import React, { useReducer } from "react";
 import TareaContext from "./TareaContext";
 import TareaReducer from "./TareaReducer";
-import { TAREAS_PROYECTO, AGREGAR_TAREA, VALIDAR_TAREA } from "../../types";
+import {
+  TAREAS_PROYECTO,
+  AGREGAR_TAREA,
+  VALIDAR_TAREA,
+  ELIMINAR_TAREA,
+} from "../../types";
 
 const TareaState = (props) => {
   const initialState = {
     tareas: [
-      { nombre: "Elegir Colores", estado: false, proyectoId: 2 },
-      { nombre: "Elegir Plataforma", estado: true, proyectoId: 1 },
-      { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 3 },
-      { nombre: "Elegir Colores", estado: false, proyectoId: 2 },
-      { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 3 },
-      { nombre: "Elegir hosting", estado: true, proyectoId: 4 },
-      { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 3 },
-      { nombre: "Elegir Colores", estado: false, proyectoId: 2 },
-      { nombre: "Elegir Pasarelas de pago", estado: false, proyectoId: 4 },
+      { id: 1, nombre: "Elegir Colores", estado: false, proyectoId: 2 },
+      { id: 2, nombre: "Elegir Plataforma", estado: true, proyectoId: 1 },
+      {
+        id: 3,
+        nombre: "Elegir Pasarelas de pago",
+        estado: false,
+        proyectoId: 3,
+      },
+      { id: 4, nombre: "Elegir Colores", estado: false, proyectoId: 2 },
+      {
+        id: 5,
+        nombre: "Elegir Pasarelas de pago",
+        estado: false,
+        proyectoId: 3,
+      },
+      { id: 6, nombre: "Elegir hosting", estado: true, proyectoId: 4 },
+      {
+        id: 7,
+        nombre: "Elegir Pasarelas de pago",
+        estado: false,
+        proyectoId: 3,
+      },
+      { id: 8, nombre: "Elegir Colores", estado: false, proyectoId: 2 },
+      {
+        id: 9,
+        nombre: "Elegir Pasarelas de pago",
+        estado: false,
+        proyectoId: 4,
+      },
     ],
     tareasProyecto: null,
     errorTarea: false,
@@ -47,6 +72,14 @@ const TareaState = (props) => {
     });
   };
 
+  //ELIMINAR TAREA POR ID
+  const deleteTodo = (id) => {
+    dispatch({
+      type: ELIMINAR_TAREA,
+      payload: id,
+    });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -56,6 +89,7 @@ const TareaState = (props) => {
         getTodos,
         addTodo,
         validateTodo,
+        deleteTodo,
       }}
     >
       {props.children}
