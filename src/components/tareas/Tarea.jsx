@@ -9,7 +9,12 @@ const Tarea = ({ tarea }) => {
 
   //llamando context
   const tareasContext = useContext(TareaContext);
-  const { deleteTodo, getTodos, changeTodoState } = tareasContext;
+  const {
+    deleteTodo,
+    getTodos,
+    changeTodoState,
+    saveActualTodo,
+  } = tareasContext;
 
   //EXtraer proyecto
   const [proyectoActual] = proyecto;
@@ -29,6 +34,10 @@ const Tarea = ({ tarea }) => {
     }
     changeTodoState(tarea);
   };
+
+  //agrega una tarea actual cuando el usuario desea editarla
+  const selecTodo = () => {};
+
   return (
     <li className="tarea sombra">
       <p>{tarea.nombre}</p>
@@ -52,7 +61,11 @@ const Tarea = ({ tarea }) => {
         )}
       </div>
       <div className="acciones">
-        <button type="button" className="btn btn-primario">
+        <button
+          type="button"
+          onClick={() => selectTodo(tarea)}
+          className="btn btn-primario"
+        >
           Editar
         </button>
         <button
