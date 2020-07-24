@@ -36,7 +36,9 @@ const Tarea = ({ tarea }) => {
   };
 
   //agrega una tarea actual cuando el usuario desea editarla
-  const selecTodo = () => {};
+  const selectTodo = (tarea) => {
+    saveActualTodo(tarea);
+  };
 
   return (
     <li className="tarea sombra">
