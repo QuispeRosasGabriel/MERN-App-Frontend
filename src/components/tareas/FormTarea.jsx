@@ -18,6 +18,7 @@ const FormTarea = () => {
     errorTarea,
     getTodos,
     tareaSeleccionada,
+    updateTodo,
   } = tareasContext;
 
   //Effect que detecta si hay una tarea seleccionada
@@ -55,11 +56,14 @@ const FormTarea = () => {
       return;
     }
     //pasar validacion
-
-    //agregar nueva tarea al state de tareas
-    tarea.proyectoId = proyectoActual.id;
-    tarea.estado = false;
-    addTodo(tarea);
+    if (tareaSeleccionada === null) {
+      // agregar nueva tarea al state de tareas
+      tarea.proyectoId = proyectoActual.id;
+      tarea.estado = false;
+      addTodo(tarea);
+    } else {
+      updateTodo(tarea);
+    }
 
     //Obtener y filtrar las tareas del proyecto actual
     getTodos(proyectoActual.id);
