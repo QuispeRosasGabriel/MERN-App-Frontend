@@ -19,6 +19,7 @@ const FormTarea = () => {
     getTodos,
     tareaSeleccionada,
     updateTodo,
+    cleanTodo,
   } = tareasContext;
 
   //Effect que detecta si hay una tarea seleccionada
@@ -63,6 +64,9 @@ const FormTarea = () => {
       addTodo(tarea);
     } else {
       updateTodo(tarea);
+
+      //Elimina tarea seleccionada del state
+      cleanTodo();
     }
 
     //Obtener y filtrar las tareas del proyecto actual

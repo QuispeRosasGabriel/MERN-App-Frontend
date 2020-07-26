@@ -9,6 +9,7 @@ import {
   ESTADO_TAREA,
   TAREA_ACTUAL,
   ACTUALIZAR_TAREA,
+  LIMPIAR_TAREA,
 } from "../../types";
 
 const TareaState = (props) => {
@@ -63,6 +64,7 @@ const TareaState = (props) => {
 
   //agregar tarea al proyecto seleccionado
   const addTodo = (tarea) => {
+    tarea.id = Math.random().toFixed();
     dispatch({
       type: AGREGAR_TAREA,
       payload: tarea,
@@ -108,6 +110,13 @@ const TareaState = (props) => {
     });
   };
 
+  //Limpiar tarea seleccionada
+  const cleanTodo = () => {
+    dispatch({
+      type: LIMPIAR_TAREA,
+    });
+  };
+
   return (
     <TareaContext.Provider
       value={{
@@ -122,6 +131,7 @@ const TareaState = (props) => {
         changeTodoState,
         saveActualTodo,
         updateTodo,
+        cleanTodo,
       }}
     >
       {props.children}
